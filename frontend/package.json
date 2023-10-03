@@ -1,0 +1,63 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.5.1",
+    "bootstrap": "^5.3.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.16.0",
+    "react-scripts": "5.0.1",
+    "recoil": "^0.7.7",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.4.1",
+    "renamer": "^4.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "build-renamer": "npm run renamer-js && npm run renamer-css",
+    "renamer-css": "renamer --path-element name --find '/main\\.[\\d\\w]+/' --replace react_ui build/static/css/*.css",
+    "renamer-css-map": "renamer --path-element name --find '/main\\.[\\d\\w]+/' --replace react_ui build/static/css/*.css",
+    "renamer-js": "renamer --path-element name --find '/main\\.[\\d\\w]+/' --replace react_ui build/static/js/*.js",
+    "rm-media-dev": "rimraf ../backend/staticfiles/media/*",
+    "copy-media-dev": "copyfiles -f build/static/media/* ../backend/static/media/",
+    "copy-js-dev": "copyfiles -f build/static/js/*.js ../backend/static/js/",
+    "copy-css-dev": "copyfiles -f build/static/css/*.css ../backend/static/css/",
+    "copy-build-dev": "npm run rm-media-dev && npm run copy-media-dev && npm run copy-css-dev && npm run copy-js-dev",
+    "collect-dev": "npm run build && npm run build-renamer && npm run copy-build-dev",
+    "rm-media-prod": "rimraf ../static/media/*",
+    "copy-media-prod": "copyfiles -f build/static/media/* ../static/media/",
+    "copy-js-prod": "copyfiles -f build/static/js/*.js ../static/js/",
+    "copy-css-prod": "copyfiles -f build/static/css/*.css ../static/css/",
+    "copy-build-prod": "npm run rm-media-prod && npm run copy-media-prod && npm run copy-css-prod && npm run copy-js-prod",
+    "collect-prod": "npm run build && npm run build-renamer && npm run copy-build-prod",
+    "collect": "npm run collect-prod && npm run collect-dev"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
