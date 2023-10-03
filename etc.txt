@@ -1,0 +1,26 @@
+1. dj-rest-auth를 통해 password reset 구현할 때 아래 두가지 주소를 이용함
+   * dj-rest-auth/password/reset/  : E-mail 주소 입력하여 해당 주소로 링크 보냄
+   * dj-rest-auth/password/reset/confirm/  : id, token, password1, password2 입력하여 reset하는 API
+   allauth가 사용되는 경우에는 serializer에 custom e-mail template을 지정해도 안 먹힘.
+   templates/account/email에 아래 세 파일을 넣어놓고 overriding 시켜야 함.
+   * base_massage.txt, password_reset_key_message.txt, password_reset_key_subjec.txt
+
+
+2. static
+   STATIC_URL <- "static/" 혹은 "/static/"으로 지정
+   STATICFILES_DIRS <- static 파일들이 있는 폴더를 지정, 여러개 지정 가능 (기본은 app/static/app/)
+   STATIC_ROOT <- collectstatic 명령으로 static 파일이 모이게 될 장소 (웹서버가 이용)
+
+
+3. Postman으로 파일 업로드
+   Body > form-data 선택
+   key에서 dropdown 메뉴를 찾아서 file로 변경 > 파일 선택
+   key에 "file_uploaded" 작성
+   그 이후 POST request 시행
+
+
+4. Postman CSRF 자동화
+   Headers에 Key: X-CSRFToken, Value {{csrftoken}} 작성
+   Test에 아래 내용 작성
+var xsrfCookie = postman.getResponseCookie("csrftoken");
+postman.setGlobalVariable('csrftoken', xsrfCookie.value);

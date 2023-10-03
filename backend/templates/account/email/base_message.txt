@@ -1,0 +1,8 @@
+{% load i18n %}{% autoescape off %}안녕하세요.
+AKI Recovery 관련해서 전문가 설문을 진행하고 있는 순천향병원 신장내과입니다.
+
+{% block content %}{% endblock %}
+
+감사합니다!
+{{ site_domain }}
+{% endautoescape %}
